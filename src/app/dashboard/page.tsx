@@ -18,7 +18,7 @@ export default function DashboardPage() {
       !storedUserID ||
       storedAccCreated !== "1"
     ) {
-      router.replace("/");
+      router.replace("/login");
       return;
     }
 

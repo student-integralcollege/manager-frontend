@@ -23,6 +23,7 @@ export default function CreateProfilePage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -62,6 +63,14 @@ export default function CreateProfilePage() {
 
       saveAccCreated(1);
 
+      // Show success message before redirecting
+      setSuccess(true);
+
+      // Wait 2 seconds so the user sees the success screen
+      await new Promise((resolve) =>
+        setTimeout(resolve, 2000)
+      );
+
       router.replace("/dashboard");
     } catch (error) {
       console.error(
@@ -76,6 +85,27 @@ export default function CreateProfilePage() {
       setLoading(false);
     }
   };
+
+  // Show success screen after profile is created
+  if (success) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-gray-100 p-5">
+        <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+            <span className="text-3xl">✓</span>
+          </div>
+
+          <h1 className="text-2xl font-bold text-gray-900">
+            Profile Created Successfully!
+          </h1>
+
+          <p className="mt-2 text-gray-500">
+            Redirecting you to the dashboard...
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-100 p-5">
