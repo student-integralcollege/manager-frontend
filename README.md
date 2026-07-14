@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manager Frontend Assessment
+A Next.js frontend application implementing the manager authentication, profile completion, routing, and dashboard flow.
 
-## Getting Started
+## Tech Stack
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Fetch API
+- localStorage
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Application Flow
+```text
+Login
+  ↓
+Google Authentication
+  ↓
+Profile Sync
+  ↓
+accCreated = 0 → Create Profile
+accCreated = 1 → Dashboard
+  ↓
+Logout → Login
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- Manager Google authentication flow
+- Profile synchronization
+- Profile completion form
+- State-based routing
+- localStorage persistence
+- Protected manager dashboard
+- Logout functionality
+- Responsive UI
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+```text
+src/
+├── app/
+│   ├── login/
+│   ├── manager/
+│   ├── create-profile/
+│   └── dashboard/
+├── api/
+└── utils/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+Create a `.env.local` file:
+```env
+NEXT_PUBLIC_API_URL=https://backend.membes.store
+NEXT_PUBLIC_USE_MOCK_AUTH=true
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Getting Started
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Mock Authentication
+The provided backend was unreachable during development. A temporary mock authentication flow is used to demonstrate the onboarding and routing functionality.
 
-## Deploy on Vercel
+Set:
+```env
+NEXT_PUBLIC_USE_MOCK_AUTH=true
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For real backend integration:
+```env
+NEXT_PUBLIC_USE_MOCK_AUTH=false
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Routing Logic
+
+| State | Route |
+|---|---|
+| No User ID | `/login` |
+| `accCreated = 0` | `/create-profile` |
+| `accCreated = 1` | `/dashboard` |
+
+## API Endpoints
+```text
+GET   /manager/getBasicProfile/{managerID}
+PATCH /manager/createManagerProfile/{managerID}
+```
+
+## Build
+```bash
+npm run build
+npm start
+```
+
+## Author
+Developed for the Next.js Frontend Assessment.
