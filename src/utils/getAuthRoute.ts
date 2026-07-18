@@ -1,6 +1,6 @@
 export const getAuthRoute = (userID: string | null, accCreated: string | null) => {
     if (!userID) {
-        return "/login";
+        return "/welcome";
     }
 
     if (accCreated === "0") {

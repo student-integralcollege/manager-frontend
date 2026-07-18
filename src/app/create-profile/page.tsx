@@ -39,12 +39,9 @@ export default function CreateProfilePage() {
   };
 
   const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>
-  ) => {
+    event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const managerID = getUserID();
-
     if (!managerID) {
       router.replace("/login");
       return;
@@ -60,9 +57,7 @@ export default function CreateProfilePage() {
       await new Promise((resolve) =>
         setTimeout(resolve, 1000)
       );
-
       saveAccCreated(1);
-
       // Show success message before redirecting
       setSuccess(true);
 
@@ -70,7 +65,6 @@ export default function CreateProfilePage() {
       await new Promise((resolve) =>
         setTimeout(resolve, 2000)
       );
-
       router.replace("/dashboard");
     } catch (error) {
       console.error(
